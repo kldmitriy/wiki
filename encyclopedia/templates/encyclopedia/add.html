@@ -1,0 +1,19 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Створення нової статті
+{% endblock %}
+
+{% block body %}
+    <h1>Створити нову статтю</h1>
+    <form action="{% url 'encyclopedia:add' %}" method="post">
+        {% csrf_token %}
+        {{ neform}}
+        <br>
+        <div class="d-flex">
+            <button type="submit" class="btn btn-primary m-1">Зберегти</button>
+            <a class="btn btn-outline-secondary m-1" href="{% url 'encyclopedia:index' %}">Cкасувати</a>
+        </div>
+    </form>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Редагування статті {{title}}
+{% endblock %}
+
+{% block body %}
+<h1>Редагування статті: {{ title }}</h1>
+<form action="{% url 'encyclopedia:edit' title %}" method="post">
+    {% csrf_token %}
+    {{ neform }}
+    <div class="d-flex">
+        <button type="submit" class="btn btn-primary m-1">Зберегти</button>
+        <a class="btn btn-outline-secondary m-1" href="{% url 'encyclopedia:index' %}">Cкасувати</a>
+    </div>
+</form>
+
+{% endblock %}
