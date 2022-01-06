@@ -65,8 +65,15 @@ def add(request):
         if form.is_valid():
             title = form.cleaned_data["title"]
             entry = form.cleaned_data["entry"]
-            util.save_entry(title, entry)
-            return HttpResponseRedirect("wiki/"+title)
+            if util.get_entry(title) == None:
+                util.save_entry(title, entry)
+                return HttpResponseRedirect("wiki/"+title)
+            else:
+               form.fields['title'].label = "Така стаття вже існує. Введіть іньшу назву:"
+               return render(request, "encyclopedia/add.html", {
+                    "form": SearchForm(),
+                    "neform": form
+                })
         else: 
             return render(request, "encyclopedia/add.html", {
                 "form": SearchForm(),
